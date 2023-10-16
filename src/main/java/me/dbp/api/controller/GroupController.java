@@ -75,7 +75,7 @@ public class GroupController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person with ID " + person_id + " not found");
         }
 
-        Person existingPerson = groupRepository.findByAerson(person_id);
+        Person existingPerson = groupRepository.findByPerson(person_id);
         return new ResponseEntity<>(existingPerson.getGroups(), HttpStatus.OK);
     }
 }
