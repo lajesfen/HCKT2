@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "group")
+@Table(name = "grouper")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

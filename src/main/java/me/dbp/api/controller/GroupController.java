@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import me.dbp.api.entity.Person;
 import me.dbp.api.entity.Group;
 import me.dbp.api.repository.GroupRepository;
-import me.dbp.api.repository.PersonRepository;
 
 import java.util.List;
 
