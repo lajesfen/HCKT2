@@ -1,5 +1,7 @@
 package me.dbp.api.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,9 +10,9 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String name;
-
     private Long id;
+    
+    private String name;
 
     @ManyToMany
     private List<Person> persons;
@@ -28,13 +30,13 @@ public class Group {
     public List<Person> getPersons() {
         return this.persons;
     }
-
-    public void setName(Long name) {
-        this.name = name;
-    }
-
+    
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPersons(List<Person> persons) {
