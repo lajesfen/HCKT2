@@ -2,9 +2,7 @@ package me.dbp.api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import me.dbp.api.entity.Alumno;
-import me.dbp.api.entity.Grade;
+import me.dbp.api.entity.Group;
 
-public interface GradeRepository extends JpaRepository<Grade, Long> {
-    Alumno findByAlumno(Long id);
+public interface GradeRepository extends JpaRepository<Group, Long> {
 }
