@@ -5,78 +5,77 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import me.dbp.api.entity.Alumno;
-import me.dbp.api.entity.Grade;
-import me.dbp.api.repository.GradeRepository;
-import me.dbp.api.repository.AlumnoRepository;
+import me.dbp.api.entity.Person;
+import me.dbp.api.entity.Group;
+import me.dbp.api.repository.GroupRepository;
+import me.dbp.api.repository.PersonRepository;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/groups")
-public class GradeController {
+public class GroupController {
 
     @Autowired
-    private GradeRepository gradeRepository;
+    private GroupsRepository groupRepository;
 
     @Autowired
-    private AlumnoRepository alumnoRepository;
+    private PersonRepository personRepository;
 
     @GetMapping
-    public ResponseEntity<List<Grade>> grades() {
-        List<Grade> grades = gradeRepository.findAll();
-        return new ResponseEntity<>(grades, HttpStatus.OK);
+    public ResponseEntity<List<Group>> groups() {
+        List<Group> groups = groupRepository.findAll();
+        return new ResponseEntity<>(groups, HttpStatus.OK);
     }
 
-    @GetMapping("/{x}")
-    public ResponseEntity<?> getGrade(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getGroup(@PathVariable Long id) {
 
-        if (!gradeRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Grade with ID " + id + " not found");
+        if (!groupRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
 
-        Grade existingGrade = gradeRepository.findById(id).get();
-        return new ResponseEntity<>(existingGrade, HttpStatus.OK);
+        Group existingGroup = groupRepository.findById(id).get();
+        return new ResponseEntity<>(existingGroup, HttpStatus.OK);
     }
 
-
     @PostMapping
-    public ResponseEntity<String> grade(@RequestBody Grade grade) {
-        gradeRepository.save(grade);
+    public ResponseEntity<String> group(@RequestBody Group group) {
+        groupRepository.save(group);
         return ResponseEntity.status(201).body("Created");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateGrade(@PathVariable Long id, @RequestBody Grade grade) {
+    public ResponseEntity<String> updateGroup(@PathVariable Long id, @RequestBody Group group) {
 
-        if (!gradeRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Grade with ID " + id + " not found");
+        if (!groupRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
         
-        grade.setId(id);
-        gradeRepository.save(grade);
+        group.setId(id);
+        groupRepository.save(group);
         return ResponseEntity.status(HttpStatus.OK).body("Updated");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteGrade(@PathVariable Long id) {
+    public ResponseEntity<String> deleteGroup(@PathVariable Long id) {
 
-        if (!gradeRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Grade with ID " + id + " not found");
+        if (!groupRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
         
-        gradeRepository.deleteById(id);
+        groupRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
     }
 
-    @GetMapping("/alumno/{alumno_id}")
-    public ResponseEntity<?> getGradeAlumno(@PathVariable Long alumno_id) {
+    @GetMapping("/person/{person_id}")
+    public ResponseEntity<?> getGroupAerson(@PathVariable Long person_id) {
 
-        if (!alumnoRepository.existsById(alumno_id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alumno with ID " + alumno_id + " not found");
+        if (!personRepository.existsById(person_id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person with ID " + person_id + " not found");
         }
 
-        Alumno existingAlumno = gradeRepository.findByAlumno(alumno_id);
-        return new ResponseEntity<>(existingAlumno.getGrades(), HttpStatus.OK);
+        Person existingPerson = groupRepository.findByAerson(person_id);
+        return new ResponseEntity<>(existingPerson.getGroups(), HttpStatus.OK);
     }
 }
