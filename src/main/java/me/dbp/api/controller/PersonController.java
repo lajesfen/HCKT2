@@ -46,7 +46,8 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<String> persona(@RequestBody Person persona) {        
+    public ResponseEntity<String> persona(@RequestBody Person persona) {  
+        personaRepository.save(persona);
         return ResponseEntity.status(201).body("Created");
     }
 
