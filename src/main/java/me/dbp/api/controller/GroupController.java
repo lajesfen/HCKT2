@@ -13,7 +13,7 @@ import me.dbp.api.repository.AlumnoRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/grades")
+@RequestMapping("/groups")
 public class GradeController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class GradeController {
         return new ResponseEntity<>(grades, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{x}")
     public ResponseEntity<?> getGrade(@PathVariable Long id) {
 
         if (!gradeRepository.existsById(id)) {
@@ -38,6 +38,7 @@ public class GradeController {
         Grade existingGrade = gradeRepository.findById(id).get();
         return new ResponseEntity<>(existingGrade, HttpStatus.OK);
     }
+
 
     @PostMapping
     public ResponseEntity<String> grade(@RequestBody Grade grade) {
