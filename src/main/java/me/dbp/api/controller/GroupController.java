@@ -17,10 +17,7 @@ import java.util.List;
 public class GroupController {
 
     @Autowired
-    private GroupsRepository groupRepository;
-
-    @Autowired
-    private PersonRepository personRepository;
+    private GroupRepository groupRepository;
 
     @GetMapping
     public ResponseEntity<List<Group>> groups() {
@@ -37,6 +34,17 @@ public class GroupController {
 
         Group existingGroup = groupRepository.findById(id).get();
         return new ResponseEntity<>(existingGroup, HttpStatus.OK);
+    }
+
+    @GetMapping("/persons/{id}")
+    public ResponseEntity<?> getGroupPerson(@PathVariable Long id) {
+
+        if (!groupRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
+        }
+
+        Group existingGroup = groupRepository.findById(id).get();
+        return new ResponseEntity<>(existingGroup.getPersons(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -66,16 +74,5 @@ public class GroupController {
         
         groupRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
-    }
-
-    @GetMapping("/person/{person_id}")
-    public ResponseEntity<?> getGroupAerson(@PathVariable Long person_id) {
-
-        if (!personRepository.existsById(person_id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person with ID " + person_id + " not found");
-        }
-
-        Person existingPerson = groupRepository.findByPerson(person_id);
-        return new ResponseEntity<>(existingPerson.getGroups(), HttpStatus.OK);
     }
 }

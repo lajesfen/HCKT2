@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import me.dbp.api.entity.Person;
-import me.dbp.api.repository.PersonaRepository;
+import me.dbp.api.repository.PersonRepository;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    private PersonaRepository personaRepository;
+    private PersonRepository personaRepository;
 
     @GetMapping
     public ResponseEntity<List<Person>> person() {
