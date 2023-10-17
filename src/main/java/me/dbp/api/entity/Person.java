@@ -2,6 +2,8 @@ package me.dbp.api.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +16,16 @@ public class Person {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "person_agroup",
+        joinColumns = {
+            @JoinColumn(name = "person_id", referencedColumnName = "id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "agroup_id", referencedColumnName = "id")
+        }
+    )
+    @JsonManagedReference
     private List<Group> groups;
 
     public Person() {}
@@ -32,10 +43,6 @@ public class Person {
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCode(Long id) {
         this.id = id;
     }
 

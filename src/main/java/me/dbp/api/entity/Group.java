@@ -2,10 +2,12 @@ package me.dbp.api.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "grouper")
+@Table(name = "agroup")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,7 +16,8 @@ public class Group {
     
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Person> persons;
 
     public Group() {}
