@@ -25,7 +25,7 @@ public class Person {
             @JoinColumn(name = "agroup_id", referencedColumnName = "id")
         }
     )
-    @JsonManagedReference
+
     private List<Group> groups;
 
     public Person() {}
