@@ -1,6 +1,7 @@
 package me.dbp.api.entity;
 
 import java.util.List;
+import me.dbp.api.entity.TypeGroup;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -15,6 +16,10 @@ public class Group {
     private Long id;
     
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="typegroup_id", nullable = false)
+    private TypeGroup typeGroup;
 
     @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonBackReference
@@ -34,6 +39,10 @@ public class Group {
         return this.persons;
     }
 
+    public TypeGroup getTypeGroup(){
+        return this.typeGroup;
+    }
+
     public int getPersonsCount() {
         return this.persons.size();
     }
@@ -48,5 +57,9 @@ public class Group {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+
+    public void setTypeGroup(TypeGroup typeGroup){
+        this.typeGroup = typeGroup;
     }
 }
