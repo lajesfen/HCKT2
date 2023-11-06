@@ -31,11 +31,10 @@ public class TypeGroupController {
         if(!typeGroupRepository.existsById(id)){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("TypeGroup with ID " + id + " not found");
         }
-        
         TypeGroup existingTypeGroup = typeGroupRepository.findById(id).get();
         return new ResponseEntity<>(existingTypeGroup, HttpStatus.OK);
     }
-    
+
     @PostMapping
     public ResponseEntity<String> typeGroup(@RequestBody TypeGroup typeGroup) {
         typeGroupRepository.save(typeGroup);
@@ -47,7 +46,6 @@ public class TypeGroupController {
         if (!typeGroupRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
-
         typeGroupRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
     }

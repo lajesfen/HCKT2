@@ -17,12 +17,7 @@ public class TypeGroup {
     @OneToMany(mappedBy = "typegroup")
     private List<Group> groups;
     public TypeGroup(){}
-
-    public TypeGroup(Long id, String name){
-        id = id;
-        name = name;
-    }
-
+    
     public Long getId(){
         return this.id;
     }

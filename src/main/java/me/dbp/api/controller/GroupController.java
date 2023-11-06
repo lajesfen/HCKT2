@@ -25,22 +25,18 @@ public class GroupController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getGroup(@PathVariable Long id) {
-
         if (!groupRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
-
         Group existingGroup = groupRepository.findById(id).get();
         return new ResponseEntity<>(existingGroup, HttpStatus.OK);
     }
 
     @GetMapping("/persons/{id}")
     public ResponseEntity<?> getGroupPerson(@PathVariable Long id) {
-
         if (!groupRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
-
         Group existingGroup = groupRepository.findById(id).get();
         return new ResponseEntity<>(existingGroup.getPersons(), HttpStatus.OK);
     }
@@ -53,11 +49,9 @@ public class GroupController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateGroup(@PathVariable Long id, @RequestBody Group group) {
-
         if (!groupRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
-        
         group.setId(id);
         groupRepository.save(group);
         return ResponseEntity.status(HttpStatus.OK).body("Updated");
@@ -65,11 +59,9 @@ public class GroupController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteGroup(@PathVariable Long id) {
-
         if (!groupRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Group with ID " + id + " not found");
         }
-        
         groupRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
     }
