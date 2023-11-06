@@ -16,7 +16,7 @@ public class Group {
     
     private String name;
 
-    @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonBackReference
     private List<Person> persons;
 
@@ -32,6 +32,10 @@ public class Group {
 
     public List<Person> getPersons() {
         return this.persons;
+    }
+
+    public int getPersonsCount() {
+        return this.persons.size();
     }
     
     public void setId(Long id) {
